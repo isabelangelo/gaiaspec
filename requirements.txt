@@ -1,0 +1,6 @@
+astropy==5.1
+matplotlib==3.7.1
+numpy==1.24.4
+pandas==1.4.3
+scipy==1.10.0
+the_cannon==0.2.93
