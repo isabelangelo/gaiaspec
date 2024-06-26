@@ -9,7 +9,8 @@ from astropy.table import QTable
 
 class Spectrum(object):
     """
-    Gaia RVS spectrum object
+    Gaia RVS spectrum object that allows standard label determination and 
+    spectrum visualization.
     
     Args:
         spectrum_path (str): path to RVS spectrum file with .csv format
@@ -17,6 +18,9 @@ class Spectrum(object):
     def __init__(self, spectrum_path):
 
         # load spectrum data from file
+        if spectrum_path[-4:]!='.csv':
+            print('ERROR: please download a .csv version of the RVS spectrum')
+            return None
         spectrum_df = pd.read_csv(spectrum_path)
 
         # store object source id
@@ -71,7 +75,7 @@ class Spectrum(object):
         # define column names
         tbl_names = ('Teff (K)', 'logg (dex)', '[Fe/H] (dex)', 
                      '[alpha/Fe] (dex)', 'Vbroad (km/s)',r'log$\chi^2$', 
-                     r'log$\rho$', r'log$\chi_{\rm Ca}^2$', r'log$\Delta\chi^2$',
+                     r'log$\rho(l_n)$', r'log$\chi_{\rm Ca}^2$', r'log$\Delta\chi^2$',
                     'SNR')
 
         # generate astropy Qtable
@@ -367,14 +371,4 @@ class Spectrum(object):
         else:
             ax4.text(np.log10(self.delta_chisq)-1.7, 200, delta_chisq_str, color=binary_color)
         ax4.set_xlabel(r'$\Delta\chi^2$');ax4.set_ylabel('number of stars')
-
-
-
-
-
-
-
-
-
-
 

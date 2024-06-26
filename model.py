@@ -1,11 +1,3 @@
-# TO DO: think about defining __all__ list here 
-# this might be good since I won't need everything
-# from model utils
-
-# TO DO : should I stop initializing the model at Teff=8000
-# and instead just look at up to 7000?
-# I'd have to re-run the code but 8000 is too high...
-
 import numpy as np
 from scipy.optimize import leastsq
 from model_utils import *
@@ -37,8 +29,14 @@ def binary_model(param1, param2, return_components=False):
 	Args:
 		param1 (list) : [Teff, logg, Fe/H, alpha/Fe, vbroad, RV] of primary
 		param2 : [Teff, logg, vbroad, RV] of secondary
+		return_components : if True, function also returns model flux of 
+		primary and secondary components
 	Returns:
 		flux_combined (np.array): per-pixel binary flux
+		flux_primary (np.array): per-pixel flux of primary 
+		(returned if return_components=True)
+		flux_secondary (np.array): per-pixel flux of secondary
+		(returned if return_components=True)
 	"""
 
 	# store primary, secondary labels
@@ -52,7 +50,7 @@ def binary_model(param1, param2, return_components=False):
 	flux1 = rvs_model([teff1, logg1, feh1, alpha1, vbroad1])
 	flux2 = rvs_model([teff2, logg2, feh2, alpha2, vbroad2])
 
-	# shift flux2 according to drv
+	# shift flux1, flux2 according to input RVs
 	delta_w1 = wav * rv1/speed_of_light_kms
 	delta_w2 = wav * rv2/speed_of_light_kms
 	flux1_shifted = np.interp(wav, wav + delta_w1, flux1)
@@ -62,11 +60,13 @@ def binary_model(param1, param2, return_components=False):
 	W1, W2 = flux_weights(teff1, teff2)
 
 	# add weighted spectra together
-	flux_combined = W1*flux1_shifted + W2*flux2_shifted
+	flux_primary = W1*flux1_shifted
+	flux_secondary = W2*flux2_shifted
+	flux_combined = flux_primary + flux_secondary
 
 	# return individual components
 	if return_components:
-		return flux_combined, W1*flux1_shifted, W2*flux2_shifted
+		return flux_combined, flux_primary, flux_secondary
 	else:
 		return flux_combined
 
@@ -108,7 +108,7 @@ def fit_single_star(flux, sigma):
 	# initial labels from cannon model
 	initial_labels = rvs_model._fiducials.copy()
 
-	# re-parameterize from vbroad to log(vroad) in optimizer
+	# re-parameterize from vbroad to log(vbroad) in optimizer
 	initial_labels[-1] = np.log10(initial_labels[-1]) 
 	# perform fit
 	fit_labels = leastsq(residuals,x0=initial_labels)[0]
@@ -172,7 +172,7 @@ def fit_binary(flux, sigma):
 		rv_i = 0
 		teff1_i, teff2_i = initial_teff
 		logg_i, feh_i, alpha_i, vbroad_i = rvs_model._fiducials[1:]
-		# re-parameterize from vbroad to log(vroad) for optimizer
+		# re-parameterize from vbroad to log(vbroad) for optimizer
 		logvbroad_i = np.log10(vbroad_i)
 		initial_labels = [teff1_i, logg_i, feh_i, alpha_i, logvbroad_i, rv_i, 
 						teff2_i, logg_i, logvbroad_i, rv_i]
@@ -203,15 +203,3 @@ def fit_binary(flux, sigma):
 		fit_cannon_labels = [teff1, logg1, feh12, alpha12, vbroad1, rv1, 
 		teff2, logg2, vbroad2, rv2]
 	return fit_cannon_labels, lowest_global_chi2
-
-
-# okay I think I wrote some code for this
-# now I need to test it maybe in the jupyter notebook?
-
-
-
-
-
-
-
-
