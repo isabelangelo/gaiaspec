@@ -1,6 +1,7 @@
 ## Acknowledgement
 
 If you would like to use this model in your own research, please cite Angelo et al. 2024 (insert ADS link).
+[![DOI](https://zenodo.org/badge/797451126.svg)](https://zenodo.org/doi/10.5281/zenodo.12710578)
 
 ## Description
 
