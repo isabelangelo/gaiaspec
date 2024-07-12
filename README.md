@@ -1,12 +1,13 @@
 ## Acknowledgement
 
 If you would like to use this model in your own research, please cite Angelo et al. 2024 (insert ADS link).
+[![DOI](https://zenodo.org/badge/797451126.svg)](https://zenodo.org/doi/10.5281/zenodo.12710578)
 
 ## Description
 
-This program allows users to inspect and classify stars with published Gaia RVS spectra. In this tutorial, we demonstrate how to determine stellar labels $T_{\rm eff}$, log$g$, [Fe/H], [$\alpha$/Fe], and $v_{\rm broad}$ from an input Gaia RVS spectrum. We also show how to plot the spectrum to look for signs of activity, binary companions, and other anomalous behavior. For more in depth instructions for interpreting these plots, see Angelo et al. (2024).
+This program allows users to inspect and classify stars with published Gaia RVS spectra. In this tutorial, we demonstrate how to determine stellar labels from an input Gaia RVS spectrum. We also show how to plot the spectrum to look for signs of activity, binary companions, and other anomalous behavior. For more in depth instructions for interpreting these plots, see Angelo et al. (2024).
 
-For this tutorial, we will use KOI-409, which is a main sequence single star. To see examples of what the labels and plots might look like for different types of stars, you can replace the spectrum_path variable with paths to other examples we provide:
+For this tutorial, we will use KOI-409, which is a main sequence single star. To see examples of what the labels and plots might look like for different types of stars, you can replace the `spectrum_path` variable with paths to other examples we provide:
 
 - main sequence single star: `./data/Kepler-409.csv`
 - unresolved binary: `./data/GaiaDR3-1535964555128078720.csv`
