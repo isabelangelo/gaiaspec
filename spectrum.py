@@ -299,8 +299,8 @@ class Spectrum(object):
         drv = self.binary_cannon_labels[-1] - self.binary_cannon_labels[5]
 
          # training density of binary components
-        primary_labels = self.binary_cannon_labels[:5]
-        secondary_labels = self.binary_cannon_labels[6:-1]
+        primary_labels = self.binary_cannon_labels[:5].tolist()
+        secondary_labels = self.binary_cannon_labels[6:-1].tolist()
         secondary_labels.insert(2, primary_labels[2])
         secondary_labels.insert(3, primary_labels[3])
         primary_density = np.log10(training_density(primary_labels))
