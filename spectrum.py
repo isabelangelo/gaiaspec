@@ -263,7 +263,7 @@ class Spectrum(object):
         ax3 = fig.add_subplot(gs[:, 2:])
         ax3.hist(np.log10(eb18_singles.single_fit_ca_resid),
              bins=np.linspace(2.7,5,15), histtype='step', color='k')
-        ax3.set_xlabel(r'Ca triplet $\chi^2$')
+        ax3.set_xlabel(r'log $\chi^2_{\rm Ca}$')
         ax3.set_ylabel('number of stars')
         ax3.axvline(np.log10(self.calcium_chisq), color=model_color)
         if log_calcium_chisq<4:
@@ -370,5 +370,5 @@ class Spectrum(object):
             ax4.text(np.log10(self.delta_chisq)+0.25, 200, delta_chisq_str, color=binary_color)
         else:
             ax4.text(np.log10(self.delta_chisq)-1.7, 200, delta_chisq_str, color=binary_color)
-        ax4.set_xlabel(r'$\Delta\chi^2$');ax4.set_ylabel('number of stars')
+        ax4.set_xlabel(r'log $\Delta\chi^2$');ax4.set_ylabel('number of stars')
 
