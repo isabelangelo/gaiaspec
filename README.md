@@ -3,13 +3,17 @@
 If you would like to use this model in your own research, please cite Angelo et al. 2024 (insert ADS link).
 [![DOI](https://zenodo.org/badge/797451126.svg)](https://zenodo.org/doi/10.5281/zenodo.12710578)
 
+## Acknowledgement
+
+If you would like to use this model in your own research, please cite Angelo et al. 2024 (insert ADS link).
+
 ## Description
 
-This program allows users to inspect and classify stars with published Gaia RVS spectra. In this tutorial, we demonstrate how to determine stellar labels from an input Gaia RVS spectrum. We also show how to plot the spectrum to look for signs of activity, binary companions, and other anomalous behavior. For more in depth instructions for interpreting these plots, see Angelo et al. (2024).
+This program allows users to inspect and classify stars with published Gaia RVS spectra. In this tutorial, we demonstrate how to determine stellar labels $T_{\rm eff}$, log$g$, [Fe/H], [$\alpha$/Fe], and $v_{\rm broad}$ from an input Gaia RVS spectrum. We also show how to plot the spectrum to look for signs of activity, binary companions, and other anomalous behavior. For more in depth instructions for interpreting these plots, see Angelo et al. (2024).
 
 For this tutorial, we will use KOI-409, which is a main sequence single star. To see examples of what the labels and plots might look like for different types of stars, you can replace the `spectrum_path` variable with paths to other examples we provide:
 
-- main sequence single star: `./data/Kepler-409.csv`
+- main sequence single star: `./data/Kepler-93.csv`
 - unresolved binary: `./data/GaiaDR3-1535964555128078720.csv`
 - noisy spectrum: `./data/KOI-001.csv`
 - evolved star: `./data/HD176650.csv`
@@ -43,9 +47,9 @@ Create a `Spectrum` object specific to the object of interest:
 ```python
 from spectrum import *
 
-# example spectrum for Kepler-409 (KOI-1925, KIC 9955598)
+# example spectrum for Kepler-93 (KOI-1925, KIC 9955598)
 # replace this with the path to the downloaded spectrum
-spectrum_path = './data/Kepler-409.csv'
+spectrum_path = './data/Kepler-93.csv'
 spec = Spectrum(spectrum_path)
 ```
 
@@ -60,15 +64,15 @@ spec.data_table()
 
 
 <div><i>QTable length=1</i>
-<table id="table140629355109440" class="table-striped table-bordered table-condensed">
-<thead><tr><th>Teff (K)</th><th>logg (dex)</th><th>[Fe/H] (dex)</th><th>[alpha/Fe] (dex)</th><th>Vbroad (km/s)</th><th>log$\chi^2$</th><th>log$\rho$</th><th>log$\chi_{\rm Ca}^2$</th><th>log$\Delta\chi^2$</th><th>SNR</th></tr></thead>
+<table id="table140590313474080" class="table-striped table-bordered table-condensed">
+<thead><tr><th>Teff (K)</th><th>logg (dex)</th><th>[Fe/H] (dex)</th><th>[alpha/Fe] (dex)</th><th>Vbroad (km/s)</th><th>log$\chi^2$</th><th>log$\rho(l_n)$</th><th>log$\chi_{\rm Ca}^2$</th><th>log$\Delta\chi^2$</th><th>SNR</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-<tr><td>5418.71</td><td>4.50</td><td>0.12</td><td>-0.01</td><td>4.59</td><td>3.31</td><td>-2.71</td><td>3.27</td><td>1.58</td><td>158.56</td></tr>
+<tr><td>5566.16</td><td>4.39</td><td>-0.12</td><td>0.03</td><td>5.73</td><td>3.30</td><td>-2.73</td><td>2.56</td><td>1.05</td><td>127.10</td></tr>
 </table></div>
 
 
 
-Plot the RVS spectrum, the best-fit Cannon model and its residuals, and the stellar properties and metrics. The distribution of labels and metrics for a population of main sequence single stars is shown here for reference.
+Plot the RVS spectrum, the best-fit Cannon model and its residuals, and the stellar properties and metrics. The distribution of labels and metrics for a population of main sequence single stars is plotted here as histograms for reference.
 
 
 ```python
@@ -94,7 +98,7 @@ spec.activity_plot()
     
 
 
-Finally, we can look for signs of an undresolved "spectral" binary:
+Finally, we can look for signs of an unresolved "spectral" binary:
 
 
 ```python
@@ -111,39 +115,4 @@ spec.binary_plot()
     
 
 
-We see from these plots that the star doesn't show any strong signs of activity, binarity, or other deviations from what we'd expect for main sequence single stars. For examples of spectra for more anomalous spectra, see Section 6 of Angelo et al. (2024). 
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
+We see from these plots that the star doesn't show particularly strong signs of activity, binarity, or other deviations from what we'd expect for main sequence single stars. For examples of spectra for more anomalous spectra, see Section 6 of Angelo et al. (2024). 
