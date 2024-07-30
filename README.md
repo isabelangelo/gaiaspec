@@ -64,7 +64,7 @@ spec.data_table()
 
 
 <div><i>QTable length=1</i>
-<table id="table140590313474080" class="table-striped table-bordered table-condensed">
+<table id="table140421683917968" class="table-striped table-bordered table-condensed">
 <thead><tr><th>Teff (K)</th><th>logg (dex)</th><th>[Fe/H] (dex)</th><th>[alpha/Fe] (dex)</th><th>Vbroad (km/s)</th><th>log$\chi^2$</th><th>log$\rho(l_n)$</th><th>log$\chi_{\rm Ca}^2$</th><th>log$\Delta\chi^2$</th><th>SNR</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
 <tr><td>5566.16</td><td>4.39</td><td>-0.12</td><td>0.03</td><td>5.73</td><td>3.30</td><td>-2.73</td><td>2.56</td><td>1.05</td><td>127.10</td></tr>
@@ -116,3 +116,8 @@ spec.binary_plot()
 
 
 We see from these plots that the star doesn't show particularly strong signs of activity, binarity, or other deviations from what we'd expect for main sequence single stars. For examples of spectra for more anomalous spectra, see Section 6 of Angelo et al. (2024). 
+
+
+```python
+
+```
